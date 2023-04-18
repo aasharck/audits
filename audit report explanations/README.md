@@ -43,4 +43,22 @@ To further mitigate the risk of smart contract vulnerabilities, it's crucial to 
 
 ## Medium
 
+### 1. Using checks inside for loops that accepts arrays
+
+The bug revolves around contracts which perform validations in `for` loops.
+
+rom initial looks the contract seems to be fine. 
+
+It simply validates some signatures and if those signatures are valid the contract transfers funds to the caller
+
+If any one of those signatures is invalid then the txn is reverted
+
+However the exploit occurs when an empty signature array is passed to the contract
+
+In that case the 'for' loop is not executed (length = 0) and the execution flow goes directly to the fund transfer statement
+
+Essentially the contract gets rekt
+
+While the non-execution of `for` loop when the length of array it is iterating over is zero seems obvious, somehow a few similar bugs went passed the development cycle and got caught during the audit
+
 ## Low
