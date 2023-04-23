@@ -41,6 +41,12 @@ This additional check will help ensure that the price data used by the smart con
 
 To further mitigate the risk of smart contract vulnerabilities, it's crucial to conduct regular audits, perform internal security checks, and leverage security audit tools pixelplex.io. You can also consider following best practices and guidelines provided in various resources, such as 0xpredator.medium.com, for auditing smart contracts and understanding common vulnerabilities.
 
+### 2. If for loop check if atleast one possibility of revert
+
+when a function uses an array, if there is a possibility of a revert in atleast one of the iteration the entire for loop fails and may lead to DOS.
+
+Example: https://github.com/code-423n4/2021-05-nftx-findings/issues/46
+
 ## Medium
 
 ### 1. Using checks inside for loops that accepts arrays
@@ -60,5 +66,13 @@ In that case the 'for' loop is not executed (length = 0) and the execution flow 
 Essentially the contract gets rekt
 
 While the non-execution of `for` loop when the length of array it is iterating over is zero seems obvious, somehow a few similar bugs went passed the development cycle and got caught during the audit
+
+### 2. returnData for call not checked
+
+function should check returnData.length == 1 before decoding(if decoding is implemented). Otherwise, if it returns no return data, the abi.decode call will revert
+
+### 3. If ERC721 and ERC1155 are handled in the same function check if they are properly implemented
+
+improper implementation may cause many issue and may even lead to loss of funds
 
 ## Low
