@@ -75,4 +75,10 @@ function should check returnData.length == 1 before decoding(if decoding is impl
 
 improper implementation may cause many issue and may even lead to loss of funds
 
+### 4. If you see a Solidity method that has an argument of type array, always check for 3 things:
+
+1. What if the array length is 0?
+2. What if there are duplicated elements in the array?
+3. What if there are zero value elements in the array?
+
 ## Low
