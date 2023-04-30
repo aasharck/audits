@@ -47,6 +47,7 @@ when a function uses an array, if there is a possibility of a revert in atleast 
 
 Example: https://github.com/code-423n4/2021-05-nftx-findings/issues/46
 
+
 ## Medium
 
 ### 1. Using checks inside for loops that accepts arrays
@@ -80,5 +81,10 @@ improper implementation may cause many issue and may even lead to loss of funds
 1. What if the array length is 0?
 2. What if there are duplicated elements in the array?
 3. What if there are zero value elements in the array?
+
+### 5. Hardhacoding addresses of contracts can cause problems if the contract is intended for other L2 chains as well.
+
+Remove hardcoded addresses if any, to prevent issues 
+
 
 ## Low
