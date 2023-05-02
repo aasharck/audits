@@ -62,6 +62,9 @@ contract Factory is IFactory, Ownable {
         return (_proposals[id].tokens, _proposals[id].weights);
     }
 
+    //! - giving empty arrays to tokens and weights will work
+    //! - licenseFee can be as large as it wants to be - mint is possible without transfering any tokens
+    //! - fake erc20 tokens can be used
     function proposeBasketLicense(
         uint256 licenseFee, 
         string memory tokenName, 

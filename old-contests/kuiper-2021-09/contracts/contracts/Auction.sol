@@ -66,6 +66,7 @@ contract Auction is IAuction {
         emit Bonded(msg.sender, bondAmount);
     }
 
+    //! - pass empty arrays to bypass and mint tokens??
     function settleAuction(
         uint256[] memory bountyIDs,
         address[] memory inputTokens,
@@ -88,6 +89,7 @@ contract Auction is IAuction {
 
         uint256 a = factory.auctionMultiplier() * basket.ibRatio();
         uint256 b = (bondTimestamp - auctionStart) * BASE / factory.auctionDecrement();
+        //! - the below will fail if b > a, revert();
         uint256 newRatio = a - b;
 
         (address[] memory pendingTokens, uint256[] memory pendingWeights) = basket.getPendingWeights();

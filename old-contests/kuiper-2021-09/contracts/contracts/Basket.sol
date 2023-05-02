@@ -33,6 +33,7 @@ contract Basket is IBasket, ERC20Upgradeable {
 
     uint256 public override lastFee;
 
+// can be initialized again
     function initialize(IFactory.Proposal memory proposal, IAuction auction_) public override {
         publisher = proposal.proposer;
         licenseFee = proposal.licenseFee;
@@ -107,6 +108,7 @@ contract Basket is IBasket, ERC20Upgradeable {
         emit Burned(msg.sender, amount);
     }
 
+    //? - check math here
     function handleFees() private {
         if (lastFee == 0) {
             lastFee = block.timestamp;
@@ -130,6 +132,7 @@ contract Basket is IBasket, ERC20Upgradeable {
 
     // changes publisher
     // timelocked
+    //! - 
     function changePublisher(address newPublisher) onlyPublisher public override {
         require(newPublisher != address(0));
 
@@ -167,6 +170,7 @@ contract Basket is IBasket, ERC20Upgradeable {
 
     // publish new index
     // timelocked
+    // no check if the old pendingWeight.tokens and pendingWeight.weights is equal to the new ones
     function publishNewIndex(address[] memory _tokens, uint256[] memory _weights) onlyPublisher public override {
         validateWeights(_tokens, _weights);
 
@@ -177,7 +181,7 @@ contract Basket is IBasket, ERC20Upgradeable {
 
                 emit PublishedNewIndex(publisher);
             } else if (auction.hasBonded()) {
-
+//? - why blank?
             } else {
                 auction.killAuction();
 
